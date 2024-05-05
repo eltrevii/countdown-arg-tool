@@ -214,11 +214,15 @@ function drawCanvasPixels(canvas, ctx, hexArray, width, height, vflip) {
   canvas.width = width;
   canvas.height = height;
   hexArray.forEach((hex, index) => {
-    hex = "#" + hex;
-    const x = index % width;
-    const y = Math.floor(index / width);
-    ctx.fillStyle = hex;
-    ctx.fillRect(x, y, 1, 1);
+    if (hex.length === 6) {
+      hex = "#" + hex;
+      const x = index % width;
+      const y = Math.floor(index / width);
+      ctx.fillStyle = hex;
+      ctx.fillRect(x, y, 1, 1);
+    } else {
+      hex = "#000000";
+    }
   });
 }
 let videoHexCodes = document.querySelector("textarea#videoHexCodes");
