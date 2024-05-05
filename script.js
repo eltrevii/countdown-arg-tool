@@ -234,20 +234,11 @@ descToUrl.addEventListener("input", function () {
     descToUrlOut.innerText = "Invalid Input";
     return;
   }
-  descToUrlOut.innerText =
+  let link =
     "https://www.youtube.com/watch?v=" +
     split
-      .map(
-        (e) =>
-          function () {
-            let i = parseInt(e);
-            console.log(i);
-            if (!isNaN(i)) {
-              return i;
-            }
-            return 36;
-          },
-      )
+      .map((e) => parseInt(e))
       .map((e) => String.fromCharCode(e))
       .join("");
+  descToUrlOut.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 });
