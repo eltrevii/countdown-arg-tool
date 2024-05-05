@@ -20,3 +20,11 @@ canvas#videoHexCodesOut {
   height: 100%;
   image-rendering: pixelated;
 }
+
+span.filled {
+  opacity: 1;
+}
+
+span.unfilled {
+  opacity: 0.5;
+}

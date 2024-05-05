@@ -155,9 +155,47 @@ function escapeHtml(unsafe) {
 let morseCode = document.querySelector("input#morseDecode");
 morseCode.value = config.morseCode.join(" ");
 let morseDecodeOut = document.querySelector("span#morseDecodeOut");
+/*
+  ChatGPT 3.5 Prompt:
+  
+  js function called fillLetters(fillPhrase, inputPhrase)
+  where fillPhrase is a string, and inputphrase is another string.
+  for each letter in fillPhrase:
+  if the letter in inputPhrase that is also in fillPhrase, add a span element with the class "filled" with the letter. REMOVE THE FIRST INSTANCE OF THAT CHARACTER FROM FILLPHRASE
+  if the letter in inputPhrase is NOT in fillPhrase, add a span element with the class "unfilled". then move to the next character in fillPhrase. 
+  
+  example:
+  fillLetters('extst', 'tex')
+  
+  output:
+  <span class="filled">e</span><span class="filled">x</span><span class="filled">t</span><span class="unfilled">s</span><span class="unfilled">t</span>
+*/
+function fillLetters(fillPhrase, inputPhrase) {
+  let output = "";
+  for (let i = 0; i < fillPhrase.length; i++) {
+    const letter = fillPhrase[i];
+    const index = inputPhrase.indexOf(letter);
+    if (index !== -1) {
+      output += `<span class="filled">${letter}</span>`;
+      inputPhrase = inputPhrase.slice(0, index) + inputPhrase.slice(index + 1);
+    } else {
+      output += `<span class="unfilled">${letter}</span>`;
+    }
+  }
+  return output;
+}
+
 function morseCodeUpdate() {
+  let decode = decodeMorse(morseCode.value);
   morseDecodeOut.innerHTML =
-    "Result: <code>" + decodeMorse(morseCode.value) + "</code>";
+    "<p>Result: <code>" +
+    decode +
+    "</code></p><p>" +
+    fillLetters(
+      "nevergonnagiveyouupnevergonnaletyoudownnevergonnarunaroundanddesertyou",
+      decode,
+    ) +
+    "</p>";
 }
 morseCodeUpdate();
 morseCode.addEventListener("input", morseCodeUpdate);
