@@ -17,6 +17,7 @@ const config = {
     /* 86 */ [89, 86, 50, 53, 82, 108, 114, 107, 115, 51, 107],
     /* 85 */ [56, 105, 73, 52, 80, 83, 78, 52, 77, 90, 119],
     /* 84 */ [45, 109, 122, 81, 121, 122, 108, 83, 71, 86, 119],
+    /* 83 */ [54, 106, 117, 56, 115, 87, 108, 90, 110, 110, 65],
   ],
   morseCode: [
     /* 100 */ "-",
@@ -36,6 +37,7 @@ const config = {
     /* 86 */ "---",
     /* 85 */ "-.",
     /* 84 */ ".",
+    /* 83 */ "-.",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -55,6 +57,7 @@ const config = {
     /* 86 */ "d3b2c2",
     /* 85 */ "bfbdd4",
     /* 84 */ "553a2a",
+    /* 83 */ "d0ceea",
   ],
 };
 
@@ -170,6 +173,74 @@ let morseDecodeOut = document.querySelector("span#morseDecodeOut");
   output:
   <span class="filled">e</span><span class="filled">x</span><span class="filled">t</span><span class="unfilled">s</span><span class="unfilled">t</span>
 */
+function mapToCircledLetters(text) {
+  const circledLetters = {
+    A: "Ⓐ",
+    B: "Ⓑ",
+    C: "Ⓒ",
+    D: "Ⓓ",
+    E: "Ⓔ",
+    F: "Ⓕ",
+    G: "Ⓖ",
+    H: "Ⓗ",
+    I: "Ⓘ",
+    J: "Ⓙ",
+    K: "Ⓚ",
+    L: "Ⓛ",
+    M: "Ⓜ",
+    N: "Ⓝ",
+    O: "Ⓞ",
+    P: "Ⓟ",
+    Q: "Ⓠ",
+    R: "Ⓡ",
+    S: "Ⓢ",
+    T: "Ⓣ",
+    U: "Ⓤ",
+    V: "Ⓥ",
+    W: "Ⓦ",
+    X: "Ⓧ",
+    Y: "Ⓨ",
+    Z: "Ⓩ",
+  };
+  return text
+    .split("")
+    .map((letter) => circledLetters[letter.toUpperCase()] || letter)
+    .join("");
+}
+function mapToFilledCircleLetters(text) {
+  const filledCircleLetters = {
+    A: "🅐",
+    B: "🅑",
+    C: "🅒",
+    D: "🅓",
+    E: "🅔",
+    F: "🅕",
+    G: "🅖",
+    H: "🅗",
+    I: "🅘",
+    J: "🅙",
+    K: "🅚",
+    L: "🅛",
+    M: "🅜",
+    N: "🅝",
+    O: "🅞",
+    P: "🅟",
+    Q: "🅠",
+    R: "🅡",
+    S: "🅢",
+    T: "🅣",
+    U: "🅤",
+    V: "🅥",
+    W: "🅦",
+    X: "🅧",
+    Y: "🅨",
+    Z: "🅩",
+  };
+  return text
+    .split("")
+    .map((letter) => filledCircleLetters[letter.toUpperCase()] || letter)
+    .join("");
+}
 function fillLetters(fillPhrase, inputPhrase) {
   let output = "";
   for (let i = 0; i < fillPhrase.length; i++) {
@@ -192,7 +263,7 @@ function morseCodeUpdate() {
     decode +
     "</code></p><p>" +
     fillLetters(
-      "nevergonnagiveyouupnevergonnaletyoudownnevergonnarunaroundanddesertyou",
+      "never gonna give you up never gonna let you down never gonna run around and desert you",
       decode,
     ) +
     "</p>";
