@@ -191,9 +191,9 @@ function fillLetters(fillPhrase, inputPhrase) {
 function morseCodeUpdate() {
   let decode = decodeMorse(morseCode.value);
   morseDecodeOut.innerHTML =
-    "<p>Result: <code>" +
+    '<span class="d-block mt-3 mb-1">Result: <code>' +
     decode +
-    "</code></p><p>" +
+    "</code></span><p>" +
     fillLetters(
       "never gonna give you up never gonna let you down never gonna run around and desert you",
       decode,
