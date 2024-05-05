@@ -227,8 +227,19 @@ console.log([
 */
 
 let descToUrl = document.querySelector("textarea#descToUrl");
+descToUrl.value = `121
+80
+45
+117
+72
+112
+70
+108
+109
+113
+77`;
 let descToUrlOut = document.querySelector("span#descToUrlOut");
-descToUrl.addEventListener("input", function () {
+function descToUrlUpdate() {
   let split = descToUrl.value.split("\n");
   if (split.length !== 11) {
     descToUrlOut.innerText = "Invalid Input";
@@ -241,4 +252,76 @@ descToUrl.addEventListener("input", function () {
       .map((e) => String.fromCharCode(e))
       .join("");
   descToUrlOut.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
-});
+}
+descToUrl.addEventListener("input", descToUrlUpdate);
+descToUrlUpdate();
+
+// https://stackoverflow.com/a/43726671/24451450
+function decodeMorse(morseCode) {
+  var ref = {
+    ".-": "a",
+    "-...": "b",
+    "-.-.": "c",
+    "-..": "d",
+    ".": "e",
+    "..-.": "f",
+    "--.": "g",
+    "....": "h",
+    "..": "i",
+    ".---": "j",
+    "-.-": "k",
+    ".-..": "l",
+    "--": "m",
+    "-.": "n",
+    "---": "o",
+    ".--.": "p",
+    "--.-": "q",
+    ".-.": "r",
+    "...": "s",
+    "-": "t",
+    "..-": "u",
+    "...-": "v",
+    ".--": "w",
+    "-..-": "x",
+    "-.--": "y",
+    "--..": "z",
+    ".----": "1",
+    "..---": "2",
+    "...--": "3",
+    "....-": "4",
+    ".....": "5",
+    "-....": "6",
+    "--...": "7",
+    "---..": "8",
+    "----.": "9",
+    "-----": "0",
+  };
+
+  return morseCode
+    .split(" ")
+    .map((a) =>
+      a
+        .split(" ")
+        .map((b) => ref[b])
+        .join(""),
+    )
+    .join("");
+}
+
+// https://stackoverflow.com/a/6234804
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+let morseCode = document.querySelector("input#morseDecode");
+let morseDecodeOut = document.querySelector("span#morseDecodeOut");
+function morseCodeUpdate() {
+  morseDecodeOut.innerHTML =
+    "Result: <code>" + decodeMorse(morseCode.value) + "</code>";
+}
+morseCode.addEventListener("input", morseCodeUpdate);
