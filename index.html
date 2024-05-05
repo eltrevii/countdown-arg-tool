@@ -20,7 +20,11 @@
       <h2>Description to URL</h2>
       <div class="ms-2">
         <label for="descToUrl">Input your numbers from Description</label>
-        <textarea class="form-control my-2" id="descToUrl" rows="11"></textarea>
+        <textarea
+          class="form-control my-2 overflow-hidden"
+          id="descToUrl"
+          rows="11"
+        ></textarea>
         <span id="descToUrlOut">Output goes here</span>
         <div class="border-0 my-2 card">
           <button
@@ -43,8 +47,58 @@
       <h2>Decode Morse</h2>
       <div class="ms-2">
         <label for="morseDecode">Input morse consisting of . and -</label>
-        <input class="form-control my-2" id="morseDecode" rows="11" />
+        <input class="form-control my-2" id="morseDecode" />
         <span id="morseDecodeOut">Output goes here</span>
+      </div>
+    </div>
+    <div class="ms-2 my-3">
+      <h2>Decode Video HexCodes</h2>
+      <div class="ms-2">
+        <label for="videoHexCodes">Input hex codes without "#"</label>
+        <textarea class="form-control my-2" id="videoHexCodes"></textarea>
+        <div class="my-3">
+          <label
+            for="videoHexCodesOutWidth"
+            id="videoHexCodesOutWidthLabel"
+            class="form-label"
+            >Width</label
+          >
+          <input
+            type="range"
+            class="form-range w-100"
+            id="videoHexCodesOutWidth"
+            min="0"
+            max="100"
+          />
+          <label
+            for="videoHexCodesOutHeight"
+            id="videoHexCodesOutHeightLabel"
+            class="form-label"
+            >Height</label
+          >
+          <input
+            type="range"
+            class="form-range w-100"
+            id="videoHexCodesOutHeight"
+            min="0"
+            max="100"
+          />
+          <!--<div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="videoHexCodesOutVFlip"
+            checked
+          />
+          <label class="form-check-label" for="videoHexCodesOutVFlip">
+            Vertical Flip
+          </label>
+        </div>-->
+        </div>
+        <canvas class="card" id="videoHexCodesOut"
+          >Your browser does not support Canvas</canvas
+        >
       </div>
     </div>
     <script

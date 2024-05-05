@@ -11,6 +11,12 @@ body {
   box-sizing: border-box;
 }
 
-textarea#descToUrl {
-  /*width: 100px;*/
+textarea {
+  resize: none;
+}
+
+canvas#videoHexCodesOut {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
 }

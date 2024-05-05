@@ -1,47 +1,60 @@
-/*
-
-console.log([].map(e => 'https://www.youtube.com/watch?v=' + e.map(f => String.fromCharCode(f)).join('')).join('\n'))
-
-*/
-
 const config = {
   descriptions: [
-    [121, 80, 45, 117, 72, 112, 70, 108, 109, 113, 77],
-    [95, 100, 86, 75, 95, 102, 55, 56, 112, 101, 69],
-    [67, 49, 54, 78, 82, 101, 66, 111, 98, 69, 52],
-    [112, 122, 90, 88, 76, 45, 109, 48, 105, 90, 77],
-    [97, 114, 72, 90, 117, 105, 108, 86, 122, 50, 77],
-    [99, 72, 106, 79, 68, 98, 70, 100, 103, 116, 69],
-    [90, 97, 75, 104, 88, 108, 74, 54, 111, 68, 48],
-    [107, 118, 72, 65, 65, 86, 72, 103, 114, 83, 89],
-    [53, 65, 90, 82, 68, 78, 68, 70, 112, 117, 48],
-    [73, 78, 101, 98, 84, 53, 114, 99, 98, 98, 73],
-    [101, 88, 56, 69, 101, 50, 84, 86, 52, 87, 65],
-    [100, 103, 48, 52, 57, 71, 81, 106, 104, 97, 48],
-    [56, 86, 104, 84, 49, 50, 51, 71, 52, 97, 119],
-    [106, 112, 113, 95, 112, 100, 83, 68, 80, 119, 81],
-    [89, 86, 50, 53, 82, 108, 114, 107, 115, 51, 107],
-    [56, 105, 73, 52, 80, 83, 78, 52, 77, 90, 119],
-    [45, 109, 122, 81, 121, 122, 108, 83, 71, 86, 119],
+    /* 100 */ [121, 80, 45, 117, 72, 112, 70, 108, 109, 113, 77],
+    /* 99 */ [95, 100, 86, 75, 95, 102, 55, 56, 112, 101, 69],
+    /* 98 */ [67, 49, 54, 78, 82, 101, 66, 111, 98, 69, 52],
+    /* 97 */ [112, 122, 90, 88, 76, 45, 109, 48, 105, 90, 77],
+    /* 96 */ [97, 114, 72, 90, 117, 105, 108, 86, 122, 50, 77],
+    /* 95 */ [99, 72, 106, 79, 68, 98, 70, 100, 103, 116, 69],
+    /* 94 */ [90, 97, 75, 104, 88, 108, 74, 54, 111, 68, 48],
+    /* 93 */ [107, 118, 72, 65, 65, 86, 72, 103, 114, 83, 89],
+    /* 92 */ [53, 65, 90, 82, 68, 78, 68, 70, 112, 117, 48],
+    /* 91 */ [73, 78, 101, 98, 84, 53, 114, 99, 98, 98, 73],
+    /* 90 */ [101, 88, 56, 69, 101, 50, 84, 86, 52, 87, 65],
+    /* 89 */ [100, 103, 48, 52, 57, 71, 81, 106, 104, 97, 48],
+    /* 88 */ [56, 86, 104, 84, 49, 50, 51, 71, 52, 97, 119],
+    /* 87 */ [106, 112, 113, 95, 112, 100, 83, 68, 80, 119, 81],
+    /* 86 */ [89, 86, 50, 53, 82, 108, 114, 107, 115, 51, 107],
+    /* 85 */ [56, 105, 73, 52, 80, 83, 78, 52, 77, 90, 119],
+    /* 84 */ [45, 109, 122, 81, 121, 122, 108, 83, 71, 86, 119],
   ],
   morseCode: [
-    "-",
-    ".",
-    "--.",
-    "-.-.",
-    "---",
-    "--.",
-    "..-",
-    ".-",
-    "-.--",
-    ".-.",
-    "..-",
-    "-..",
-    "-.",
-    "-.",
-    "---",
-    "-.",
-    ".",
+    /* 100 */ "-",
+    /* 99 */ ".",
+    /* 98 */ "--.",
+    /* 97 */ "-.-.",
+    /* 96 */ "---",
+    /* 95 */ "--.",
+    /* 94 */ "..-",
+    /* 93 */ ".-",
+    /* 92 */ "-.--",
+    /* 91 */ ".-.",
+    /* 90 */ "..-",
+    /* 89 */ "-..",
+    /* 88 */ "-.",
+    /* 87 */ "-.",
+    /* 86 */ "---",
+    /* 85 */ "-.",
+    /* 84 */ ".",
+  ],
+  hexCode: [
+    /* 100 */ "d3ceed",
+    /* 99 */ "433c30",
+    /* 98 */ "977d86",
+    /* 97 */ "675c5b",
+    /* 96 */ "867a7e",
+    /* 95 */ "c2a9b6",
+    /* 94 */ "d6d2ea",
+    /* 93 */ "b8b8d8",
+    /* 92 */ "a15948",
+    /* 91 */ "2d2712",
+    /* 90 */ "231e12",
+    /* 89 */ "c1adbb",
+    /* 88 */ "d0d2f1",
+    /* 87 */ "362e28",
+    /* 86 */ "d3b2c2",
+    /* 85 */ "bfbdd4",
+    /* 84 */ "553a2a",
   ],
 };
 
@@ -148,3 +161,84 @@ function morseCodeUpdate() {
 }
 morseCodeUpdate();
 morseCode.addEventListener("input", morseCodeUpdate);
+
+/*
+  ChatGPT 3.5 Prompt:
+  
+  js function drawPixels(hexArray, width, height) that does the following:
+  clear canvas
+  set canvas width and height
+  for each hex value in hexArray
+  add "#" to the beginning and draw that pixel at the (Math.floor(index / width) + 1, index % height)
+*/
+function drawCanvasPixels(canvas, ctx, hexArray, width, height, vflip) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.width = width;
+  canvas.height = height;
+  hexArray.forEach((hex, index) => {
+    hex = "#" + hex;
+    const x = index % width;
+    const y = Math.floor(index / width);
+    ctx.fillStyle = hex;
+    ctx.fillRect(x, y, 1, 1);
+  });
+}
+let videoHexCodes = document.querySelector("textarea#videoHexCodes");
+videoHexCodes.value = config.hexCode.join("\n");
+let videoHexCodesOut = document.querySelector("canvas#videoHexCodesOut");
+let videoHexCodesOutCtx = videoHexCodesOut.getContext("2d");
+let videoHexCodesDimesion = {
+  x: 10,
+  y: 10,
+  vflip: true,
+};
+function videoHexCodesUpdate() {
+  let split = videoHexCodes.value.split("\n");
+  videoHexCodes.setAttribute("rows", split.length);
+  drawCanvasPixels(
+    videoHexCodesOut,
+    videoHexCodesOutCtx,
+    split,
+    videoHexCodesDimesion.x,
+    videoHexCodesDimesion.y,
+    videoHexCodesDimesion.vflip,
+  );
+}
+//videoHexCodesUpdate();
+videoHexCodes.addEventListener("input", videoHexCodesUpdate);
+function videoHexCodesOutDimensionsUpdate() {
+  videoHexCodesDimesion.x = parseInt(videoHexCodesOutWidth.value);
+  videoHexCodesDimesion.y = parseInt(videoHexCodesOutHeight.value);
+  //videoHexCodesDimesion.vflip = videoHexCodesOutVFlip.checked;
+  videoHexCodesOutWidthLabel.innerText = "Width: " + videoHexCodesDimesion.x;
+  videoHexCodesOutHeightLabel.innerText = "Height: " + videoHexCodesDimesion.y;
+  videoHexCodesUpdate();
+}
+/*let videoHexCodesOutVFlip = document.querySelector(
+  "input#videoHexCodesOutVFlip",
+);
+videoHexCodesOutVFlip.value = videoHexCodesDimesion.vflip;
+videoHexCodesOutVFlip.addEventListener(
+  "input",
+  videoHexCodesOutDimensionsUpdate,
+);*/
+let videoHexCodesOutWidthLabel = document.querySelector(
+  "#videoHexCodesOutWidthLabel",
+);
+let videoHexCodesOutWidth = document.querySelector("#videoHexCodesOutWidth");
+videoHexCodesOutWidth.value = videoHexCodesDimesion.x;
+videoHexCodesOutWidth.addEventListener(
+  "input",
+  videoHexCodesOutDimensionsUpdate,
+);
+
+let videoHexCodesOutHeightLabel = document.querySelector(
+  "#videoHexCodesOutHeightLabel",
+);
+let videoHexCodesOutHeight = document.querySelector("#videoHexCodesOutHeight");
+videoHexCodesOutHeight.value = videoHexCodesDimesion.y;
+videoHexCodesOutHeight.addEventListener(
+  "input",
+  videoHexCodesOutDimensionsUpdate,
+);
+videoHexCodesOutDimensionsUpdate();
