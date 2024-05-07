@@ -176,18 +176,22 @@ let morseDecodeOut = document.querySelector("span#morseDecodeOut");
   output:
   <span class="filled">e</span><span class="filled">x</span><span class="filled">t</span><span class="unfilled">s</span><span class="unfilled">t</span>
 */
-function fillLetters(fillPhrase, inputPhrase) {
+function fillLetters(fillPhrase, hexes, inputPhrase) {
   let output = "";
+  let otherHex = [];
   for (let i = 0; i < fillPhrase.length; i++) {
     const letter = fillPhrase[i];
     const index = inputPhrase.indexOf(letter);
     if (index !== -1) {
       output += `<span class="filled">${letter}</span>`;
+      otherHex.push(hexes[index]);
       inputPhrase = inputPhrase.slice(0, index) + inputPhrase.slice(index + 1);
     } else {
       output += `<span class="unfilled">${letter}</span>`;
+      otherHex.push("000000");
     }
   }
+  console.log(otherHex.join("\n"));
   return output;
 }
 
@@ -196,9 +200,10 @@ function morseCodeUpdate() {
   morseDecodeOut.innerHTML =
     '<span class="d-block mt-3 mb-1">Result: <code>' +
     decode +
-    "</code></span><p>" +
+    '</code></span><p style="overflow-wrap: anywhere;">' +
     fillLetters(
-      "never gonna give you up never gonna let you down never gonna run around and desert you",
+      "nevergonnagiveyouupnevergonnaletyoudownnevergonnarunaroundanddesertyounevergonnamakeyoucrynevergonnasaygoodbyenevergonnatellalieandhurtyou",
+      config.hexCode,
       decode,
     ) +
     "</p>";
