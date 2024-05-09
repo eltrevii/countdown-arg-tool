@@ -21,6 +21,10 @@ canvas#videoHexCodesOut {
   image-rendering: pixelated;
 }
 
+span {
+  white-space: pre-wrap;
+}
+
 span.filled {
   opacity: 1;
 }

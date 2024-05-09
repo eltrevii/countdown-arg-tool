@@ -20,6 +20,7 @@ const config = {
     /* 83 */ [54, 106, 117, 56, 115, 87, 108, 90, 110, 110, 65],
     /* 82 */ [82, 109, 52, 79, 113, 80, 121, 71, 82, 100, 107],
     /* 81 */ [76, 50, 88, 119, 122, 51, 106, 117, 118, 52, 115],
+    /* 80 */ [101, 100, 83, 48, 116, 57, 116, 69, 48, 53, 119],
   ],
   morseCode: [
     /* 100 */ "-",
@@ -42,6 +43,7 @@ const config = {
     /* 83 */ "-.",
     /* 82 */ "-.",
     /* 81 */ "---",
+    /* 80 */ "-..",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -64,6 +66,7 @@ const config = {
     /* 83 */ "d0ceea",
     /* 82 */ "c2b9d2",
     /* 81 */ "5a3b32",
+    /* 80 */ "7d6667",
   ],
 };
 
@@ -184,17 +187,20 @@ function fillLetters(fillPhrase, hexes, inputPhrase) {
   let otherHex = [];
   for (let i = 0; i < fillPhrase.length; i++) {
     const letter = fillPhrase[i];
-    const index = inputPhrase.indexOf(letter);
+    const index = inputPhrase.toLowerCase().indexOf(letter.toLowerCase());
     if (index !== -1) {
       output += `<span class="filled">${letter}</span>`;
       otherHex.push(hexes[index]);
       inputPhrase = inputPhrase.slice(0, index) + inputPhrase.slice(index + 1);
     } else {
       output += `<span class="unfilled">${letter}</span>`;
-      otherHex.push("000000");
+      if (letter !== " " && !letter.includes("\r") && !letter.includes("\n")) {
+        otherHex.push("000000");
+      }
     }
   }
   console.log(otherHex.join("\n"));
+  config.hexCodeUnscramble = otherHex;
   return output;
 }
 
@@ -203,9 +209,14 @@ function morseCodeUpdate() {
   morseDecodeOut.innerHTML =
     '<span class="d-block mt-3 mb-1">Result: <code>' +
     decode +
-    '</code></span><p style="overflow-wrap: anywhere;">' +
+    '</code></span><h4>Morse Lyric Map</h4><p class="ms-2" style="overflow-wrap: anywhere;">' +
     fillLetters(
-      "nevergonnagiveyouupnevergonnaletyoudownnevergonnarunaroundanddesertyounevergonnamakeyoucrynevergonnasaygoodbyenevergonnatellalieandhurtyou",
+      `Never gonna give you up
+Never gonna let you down
+Never gonna run around and desert you
+Never gonna make you cry
+Never gonna say goodbye
+Never gonna tell a lie and hurt you`,
       config.hexCode,
       decode,
     ) +
@@ -224,6 +235,9 @@ morseCode.addEventListener("input", morseCodeUpdate);
   add "#" to the beginning and draw that pixel at the (Math.floor(index / width) + 1, index % height)
 */
 function drawCanvasPixels(canvas, ctx, hexArray, width, height, vflip) {
+  if (vflip) {
+    hexArray = config.hexCodeUnscramble;
+  }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   canvas.width = width;
   canvas.height = height;
@@ -265,19 +279,19 @@ videoHexCodes.addEventListener("input", videoHexCodesUpdate);
 function videoHexCodesOutDimensionsUpdate() {
   videoHexCodesDimesion.x = parseInt(videoHexCodesOutWidth.value);
   videoHexCodesDimesion.y = parseInt(videoHexCodesOutHeight.value);
-  //videoHexCodesDimesion.vflip = videoHexCodesOutVFlip.checked;
+  videoHexCodesDimesion.vflip = videoHexCodesOutVFlip.checked;
   videoHexCodesOutWidthLabel.innerText = "Width: " + videoHexCodesDimesion.x;
   videoHexCodesOutHeightLabel.innerText = "Height: " + videoHexCodesDimesion.y;
   videoHexCodesUpdate();
 }
-/*let videoHexCodesOutVFlip = document.querySelector(
+let videoHexCodesOutVFlip = document.querySelector(
   "input#videoHexCodesOutVFlip",
 );
 videoHexCodesOutVFlip.value = videoHexCodesDimesion.vflip;
 videoHexCodesOutVFlip.addEventListener(
   "input",
   videoHexCodesOutDimensionsUpdate,
-);*/
+);
 let videoHexCodesOutWidthLabel = document.querySelector(
   "#videoHexCodesOutWidthLabel",
 );
