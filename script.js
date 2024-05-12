@@ -179,6 +179,19 @@ function escapeHtml(unsafe) {
 let morseCode = document.querySelector("input#morseDecode");
 morseCode.value = config.morseCode.join(" ");
 let morseDecodeOut = document.querySelector("span#morseDecodeOut");
+Array.prototype.remove = function () {
+  var what,
+    a = arguments,
+    L = a.length,
+    ax;
+  while (L && this.length) {
+    what = a[--L];
+    while ((ax = this.indexOf(what)) !== -1) {
+      this.splice(ax, 1);
+    }
+  }
+  return this;
+};
 /*
   ChatGPT 3.5 Prompt:
   
@@ -194,16 +207,20 @@ let morseDecodeOut = document.querySelector("span#morseDecodeOut");
   output:
   <span class="filled">e</span><span class="filled">x</span><span class="filled">t</span><span class="unfilled">s</span><span class="unfilled">t</span>
 */
-function fillLetters(fillPhrase, hexes, inputPhrase) {
+/*function fillLetters(fillPhrase, hexes, inputPhrase) {
   let output = "";
   let otherHex = [];
+  let used = [];
   for (let i = 0; i < fillPhrase.length; i++) {
     const letter = fillPhrase[i];
     const index = inputPhrase.toLowerCase().indexOf(letter.toLowerCase());
     if (index !== -1) {
+      console.log(letter, index);
       output += `<span class="filled">${letter}</span>`;
+      used.push(index);
       otherHex.push(hexes[index]);
       inputPhrase = inputPhrase.slice(0, index) + inputPhrase.slice(index + 1);
+      console.log(inputPhrase);
     } else {
       output += `<span class="unfilled">${letter}</span>`;
       if (letter !== " " && !letter.includes("\r") && !letter.includes("\n")) {
@@ -212,7 +229,35 @@ function fillLetters(fillPhrase, hexes, inputPhrase) {
     }
   }
   console.log(otherHex.join("\n"));
+  console.log(used.sort((a, b) => a - b));
   config.hexCodeUnscramble = otherHex;
+  return output;
+}*/
+function fillLetters(fillPhrase, hexes, inputPhrase) {
+  let fillArray = fillPhrase
+    //.replace(/ |\r|\n/g, "")
+    .toLowerCase()
+    .split("");
+  let fillArrayCase = fillPhrase.split("");
+  let inputArray = inputPhrase.toLowerCase().split("");
+  let output = "";
+  let otherHex = [];
+  fillArray.forEach((letter, fillIndexOfChar) => {
+    let inputIndexOfChar = inputArray.indexOf(letter);
+    if (inputIndexOfChar > -1) {
+      //console.log(letter, fillIndexOfChar, hexes[inputIndexOfChar]);
+      output += `<span class="filled">${fillArrayCase[fillIndexOfChar]}</span>`;
+      otherHex.push(hexes[inputIndexOfChar]);
+      inputArray[inputIndexOfChar] = null;
+    } else {
+      output += `<span class="unfilled">${fillArrayCase[fillIndexOfChar]}</span>`;
+      if (letter !== " " && !letter.includes("\r") && !letter.includes("\n")) {
+        otherHex.push("000000");
+      }
+    }
+  });
+  config.hexCodeUnscramble = otherHex;
+  //console.log(otherHex);
   return output;
 }
 
