@@ -29,7 +29,8 @@
 
   <body class="m-4">
     <h1>Countdown ARG Tool</h1>
-    <p>A set of tools to help solve Countdown ARG</p>
+    <p class="mb-2">A set of tools to help solve Countdown ARG.</p>
+    <p id="updateDay"></p>
     <div class="ms-2 my-3">
       <h2>Description to URL</h2>
       <div class="ms-2">
@@ -37,7 +38,6 @@
         <textarea
           class="form-control my-2 overflow-hidden"
           id="descToUrl"
-          rows="11"
         ></textarea>
         <span id="descToUrlOut">Output goes here</span>
         <div class="border-0 my-2 card">
@@ -63,6 +63,16 @@
         <label for="morseDecode">Input morse consisting of . and -</label>
         <input class="form-control my-2" id="morseDecode" />
         <span id="morseDecodeOut">Output goes here</span>
+      </div>
+    </div>
+    <div class="ms-2 my-3">
+      <h2>Make A Comment</h2>
+      <div class="ms-2">
+        <label for="spreadComment">Copy & Paste:</label>
+        <textarea
+          class="form-control my-2 overflow-hidden"
+          id="spreadComment"
+        ></textarea>
       </div>
     </div>
     <div class="ms-2 my-3">

@@ -101,7 +101,75 @@ const config = {
     /* 70 */ "cd9793",
     /* 69 */ "89747d",
   ],
+  lastUpdatedDate: createDate(5, 19, 2024, 3, 38, false),
 };
+
+/*
+  ChatGPT 3.5 Prompt:
+
+  js join array with commas and "and" at the end
+*/
+function joinWithCommasAnd(array) {
+  if (array.length === 0) {
+    return "";
+  } else if (array.length === 1) {
+    return array[0];
+  } else if (array.length === 2) {
+    return array.join(" and ");
+  } else {
+    const lastElement = array.pop();
+    return `${array.join(", ")}, and ${lastElement}`;
+  }
+}
+
+/*
+  ChatGPT 3.5 Prompt:
+
+  js function create date from m, d, y, and h:m, and isAm
+*/
+function createDate(month, day, year, hour, minute, isAm) {
+  if (isAm && hour === 12) {
+    hour = 0;
+  } else if (!isAm && hour !== 12) {
+    hour += 12;
+  }
+
+  return new Date(year, month - 1, day, hour, minute);
+}
+
+/*
+  ChatGPT 3.5 Prompt:
+  
+  js date get "N Days, N Hours, and N Minutes Ago" function when passed a time in the past 
+*/
+function timeAgo(pastDate) {
+  const now = new Date();
+  const diffInMilliseconds = now - new Date(pastDate);
+
+  const minutes = Math.floor(diffInMilliseconds / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  const displayMinutes = minutes % 60;
+  const displayHours = hours % 24;
+  const displayDays = days;
+
+  let array = [];
+  if (displayDays > 0) {
+    array.push(`${displayDays} Day${displayDays === 1 ? "" : "s"}`);
+  }
+  if (displayHours) {
+    array.push(`${displayHours} Hour${displayHours === 1 ? "" : "s"}`);
+  }
+  if (displayMinutes) {
+    array.push(`${displayMinutes} Minute${displayMinutes === 1 ? "" : "s"}`);
+  }
+
+  return `<span style="color: ${displayDays >= 1 ? "#ff5454" : "#54ff54"};">Day ${100 - (config.descriptions.length - 1)} (${joinWithCommasAnd(array)} Ago)</span>`;
+}
+
+document.querySelector("p#updateDay").innerHTML =
+  `Last updated on ${timeAgo(config.lastUpdatedDate)}. `;
 
 let descToUrl = document.querySelector("textarea#descToUrl");
 descToUrl.value =
@@ -282,11 +350,29 @@ function fillLetters(fillPhrase, hexes, inputPhrase) {
   return output;
 }
 
+/*
+  ChatGPT 3.5 Prompt:
+
+  js insert period for every 30 characters in a string
+*/
+function insertEveryNthChars(str, char, n) {
+  let result = "";
+  for (let i = 0; i < str.length; i++) {
+    result += str[i];
+    if ((i + 1) % n === 0) {
+      result += char;
+    }
+  }
+  return result;
+}
+
+let spreadComment = document.querySelector("textarea#spreadComment");
+let decodedMorse = "";
 function morseCodeUpdate() {
-  let decode = decodeMorse(morseCode.value);
+  decodedMorse = decodeMorse(morseCode.value);
   morseDecodeOut.innerHTML =
     '<span class="d-block mt-3 mb-1">Result: <code>' +
-    decode +
+    decodedMorse +
     '</code></span><h4>Morse Lyric Map</h4><p class="ms-2" style="overflow-wrap: anywhere;">' +
     fillLetters(
       `Never gonna give you up
@@ -296,9 +382,14 @@ Never gonna make you cry
 Never gonna say goodbye
 Never gonna tell a lie and hurt you`,
       config.hexCode,
-      decode,
+      decodedMorse,
     ) +
     "</p>";
+
+  spreadComment.value = `hidden message:
+current morse: ${config.morseCode.join(" ")}
+current message: ${insertEveryNthChars(decodedMorse, ".", 31)} (ignore the dot, the channel blocks the comment if the dot is gone)
+countdown arg tool (with unscrambled letters & predicted image) in description of this playlist: https://www.youtube.com/playlist?list=PL5Y8yo2AZE3E-I5dKD8djw4v46wKOoWgG`;
 }
 morseCodeUpdate();
 morseCode.addEventListener("input", morseCodeUpdate);
@@ -342,7 +433,7 @@ let videoHexCodesDimesion = {
 };
 function videoHexCodesUpdate() {
   let split = videoHexCodes.value.split("\n");
-  videoHexCodes.setAttribute("rows", split.length);
+  //videoHexCodes.setAttribute("rows", split.length);
   drawCanvasPixels(
     videoHexCodesOut,
     videoHexCodesOutCtx,
@@ -390,3 +481,14 @@ videoHexCodesOutHeight.addEventListener(
   videoHexCodesOutDimensionsUpdate,
 );
 videoHexCodesOutDimensionsUpdate();
+
+document.querySelectorAll("textarea").forEach(function (textarea) {
+  textarea.setAttribute(
+    "style",
+    "height:" + textarea.scrollHeight + "px;overflow-y:hidden;",
+  );
+  textarea.addEventListener("input", function () {
+    this.style.height = 0;
+    this.style.height = this.scrollHeight + "px";
+  });
+});
