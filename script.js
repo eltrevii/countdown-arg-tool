@@ -32,6 +32,8 @@ const config = {
     /* 71 */ [70, 104, 82, 121, 49, 110, 88, 65, 112, 115, 73],
     /* 70 */ [72, 90, 102, 57, 105, 77, 100, 109, 56, 112, 69],
     /* 69 */ [54, 49, 51, 106, 98, 56, 116, 56, 89, 98, 103],
+    /* 68 */ [103, 102, 75, 56, 68, 81, 67, 54, 80, 84, 48],
+    /* 67 */ [90, 97, 50, 108, 74, 49, 70, 55, 80, 108, 77],
   ],
   morseCode: [
     /* 100 */ "-",
@@ -66,6 +68,8 @@ const config = {
     /* 71 */ ".",
     /* 70 */ ".-.",
     /* 69 */ ".-",
+    /* 68 */ ".-.",
+    /* 67 */ "...",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -100,8 +104,10 @@ const config = {
     /* 71 */ "493a30",
     /* 70 */ "cd9793",
     /* 69 */ "89747d",
+    /* 68 */ "837982",
+    /* 67 */ "5f5549",
   ],
-  lastUpdatedDate: createDate(5, 19, 2024, 3, 38, false),
+  lastUpdatedDate: createDate(5, 21, 2024, 5, 19, false),
 };
 
 /*
@@ -164,8 +170,7 @@ function timeAgo(pastDate) {
   if (displayMinutes) {
     array.push(`${displayMinutes} Minute${displayMinutes === 1 ? "" : "s"}`);
   }
-
-  return `<span style="color: ${displayDays >= 1 ? "#ff5454" : "#54ff54"};">Day ${100 - (config.descriptions.length - 1)} (${joinWithCommasAnd(array)} Ago)</span>`;
+  return `<span style="color: ${displayDays >= 1 ? "#ff5454" : "#54ff54"};">Day ${100 - (config.descriptions.length - 1)} (${array.length === 0 ? "Right Now" : `${joinWithCommasAnd(array)} Ago`})</span>`;
 }
 
 document.querySelector("p#updateDay").innerHTML =
