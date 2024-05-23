@@ -35,6 +35,7 @@ const config = {
     /* 68 */ [103, 102, 75, 56, 68, 81, 67, 54, 80, 84, 48],
     /* 67 */ [90, 97, 50, 108, 74, 49, 70, 55, 80, 108, 77],
     /* 66 */ [100, 99, 85, 109, 49, 57, 77, 114, 57, 69, 115],
+    /* 65 */ [121, 110, 79, 109, 66, 75, 72, 52, 82, 48, 111],
   ],
   morseCode: [
     /* 100 */ "-",
@@ -72,6 +73,7 @@ const config = {
     /* 68 */ ".-.",
     /* 67 */ "...",
     /* 66 */ ".--.",
+    /* 65 */ ".",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -109,8 +111,9 @@ const config = {
     /* 68 */ "837982",
     /* 67 */ "5f5549",
     /* 66 */ "d7d6f6",
+    /* 65 */ "786262",
   ],
-  lastUpdatedDate: createDate(5, 22, 2024, 3, 3, false),
+  //lastUpdatedDate: createDate(5, 22, 2024, 3, 3, false),
 };
 
 /*
@@ -176,8 +179,8 @@ function timeAgo(pastDate) {
   return `<span style="color: ${displayDays >= 1 ? "#ff5454" : "#54ff54"};">Day ${100 - (config.descriptions.length - 1)} (${array.length === 0 ? "Right Now" : `${joinWithCommasAnd(array)} Ago`})</span>`;
 }
 
-document.querySelector("p#updateDay").innerHTML =
-  `Last updated on ${timeAgo(config.lastUpdatedDate)}. `;
+//document.querySelector("p#updateDay").innerHTML =
+//`Last updated on ${timeAgo(config.lastUpdatedDate)}. `;
 
 let descToUrl = document.querySelector("textarea#descToUrl");
 descToUrl.value =
