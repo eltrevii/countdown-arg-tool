@@ -36,6 +36,8 @@ const config = {
     /* 67 */ [90, 97, 50, 108, 74, 49, 70, 55, 80, 108, 77],
     /* 66 */ [100, 99, 85, 109, 49, 57, 77, 114, 57, 69, 115],
     /* 65 */ [121, 110, 79, 109, 66, 75, 72, 52, 82, 48, 111],
+    /* 64 */ [116, 56, 78, 71, 121, 50, 86, 118, 104, 87, 103],
+    /* 63 */ [49, 122, 76, 119, 102, 69, 87, 122, 88, 68, 103],
   ],
   morseCode: [
     /* 100 */ "-",
@@ -74,6 +76,8 @@ const config = {
     /* 67 */ "...",
     /* 66 */ ".--.",
     /* 65 */ ".",
+    /* 64 */ "...-",
+    /* 63 */ "-.",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -112,6 +116,8 @@ const config = {
     /* 67 */ "5f5549",
     /* 66 */ "d7d6f6",
     /* 65 */ "786262",
+    /* 64 */ "d3d0f0",
+    /* 63 */ "aeaabb",
   ],
   //lastUpdatedDate: createDate(5, 22, 2024, 3, 3, false),
 };
@@ -398,7 +404,7 @@ Never gonna tell a lie and hurt you`,
     "</p>";
 
   spreadComment.value = `hidden message:
-current morse: ${config.morseCode.join(" ")}
+current morse: (Previous Morse Omitted. Don't want to be blocked again) ${config.morseCode.join(" ").slice(-30)}
 current message: ${insertEveryNthChars(decodedMorse, ".", 31)} (ignore the dot, the channel blocks the comment if the dot is gone)
 countdown arg tool (with unscrambled letters & predicted image) in description of this playlist: https://www.youtube.com/playlist?list=PL5Y8yo2AZE3E-I5dKD8djw4v46wKOoWgG`;
 }
