@@ -38,7 +38,14 @@ const config = {
     /* 65 */ [121, 110, 79, 109, 66, 75, 72, 52, 82, 48, 111],
     /* 64 */ [116, 56, 78, 71, 121, 50, 86, 118, 104, 87, 103],
     /* 63 */ [49, 122, 76, 119, 102, 69, 87, 122, 88, 68, 103],
-    /* 62 */ [87,            104,          81,          80,           114,           52,           56,            121,           119,            105,            56]
+    /* 62 */ [87, 104, 81, 80, 114, 52, 56, 121, 119,            105, 56],
+    /* 61 */ [112, 56, 80, 106, 116, 113, 110, 101, 52, 69, 56],
+    /* 60 */ [69, 81, 85, 117, 100, 75, 78, 50, 56, 113, 99],
+    /* 59 */ [88, 115, 45, 114, 104, 65, 98, 53, 71, 107, 107],
+    /* 58 */ [68, 52, 55, 55, 67, 73, 56, 55, 70, 100, 65],
+    /* 57 */ [109, 50, 85, 100, 119, 78, 71, 85, 54, 87, 56],
+    /* 56 */ [52, 104, 53, 120, 112, 117, 75, 80, 101, 73, 119],
+    /* 55 */ [108, 68, 100, 104, 73, 118, 84, 104, 101, 49, 85]
   ],
   morseCode: [
     /* 100 */ "-",
@@ -80,6 +87,13 @@ const config = {
     /* 64 */ "...-",
     /* 63 */ "-.",
     /* 62 */ ".-",
+    /* 61 */ "---",
+    /* 60 */ "--.",
+    /* 59 */ "--.",
+    /* 58 */ "-.",
+    /* 57 */ "-.",
+    /* 56 */ "-..",
+    /* 55 */ ".-.",
   ],
   hexCode: [
     /* 100 */ "d3ceed",
@@ -121,6 +135,13 @@ const config = {
     /* 64 */ "d3d0f0",
     /* 63 */ "aeaabb",
     /* 62 */ "271700",
+    /* 61 */ "3f322c",
+    /* 60 */ "c4766c",
+    /* 59 */ "292718",
+    /* 58 */ "b7b7d0",
+    /* 57 */ "b3aeca",
+    /* 56 */ "675959",
+    /* 55 */ "a57f75",
   ],
   //lastUpdatedDate: createDate(5, 22, 2024, 3, 3, false),
 };
@@ -407,8 +428,8 @@ Never gonna tell a lie and hurt you`,
     "</p>";
 
   spreadComment.value = `hidden message:
-current morse: (Previous Morse Omitted. Don't want to be blocked again) ${config.morseCode.join(" ").slice(-30)}
-current message: ${insertEveryNthChars(decodedMorse, ".", 31)} (ignore the dot, the channel blocks the comment if the dot is gone)
+current morse: (...) ${config.morseCode.join(" ").slice(-30)}
+current message: ${insertEveryNthChars(decodedMorse, ".", 31)}
 countdown arg tool (with unscrambled letters & predicted image) in description of this playlist: https://www.youtube.com/playlist?list=PL5Y8yo2AZE3E-I5dKD8djw4v46wKOoWgG`;
 }
 morseCodeUpdate();
